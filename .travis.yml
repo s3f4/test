@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true s3f4/test npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "test"
+  env: "Test-env"
+  bucket_name: "elasticbeanstalk-us-east-2-096703671894"
+  bucket_path: "test"
+  on:
+    branch: master
+  saccess_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
